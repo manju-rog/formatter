@@ -1,0 +1,24 @@
+react should take a string
+if that string is json, then beautify it in json format and print in react
+if in xml, then format in xml
+if any other format, then not format anything
+we donno if we are getting json/xml/txt file
+even if we send string as json, if its not able to format..
+then let it not format .. just print as it is
+
+
+
+
+
+{"name":"Megha","city":"Hyderabad","skills":["React","JavaScript"]}
+
+
+<user><name>Megha</name><city>Hyderabad</city><skills><skill>React</skill></skills></user>
+
+
+
+{"users":[{"id":1,"name":"Alice Smith","email":"alice.smith@example.com","address":{"street":"123 Maple Street","city":"Springfield","state":"IL","zipcode":"62704"},"phoneNumbers":["555-1234","555-5678"],"roles":["admin","editor"],"preferences":{"notifications":true,"newsletter":false,"themes":["dark","blue"]}},{"id":2,"name":"Bob Johnson","email":"bob.johnson@example.com","address":{"street":"456 Elm Street","city":"Riverdale","state":"NY","zipcode":"10471"},"phoneNumbers":["555-9876"],"roles":["viewer"],"preferences":{"notifications":false,"newsletter":true,"themes":["light","green"]}},{"id":3,"name":"Charlie Davis","email":"charlie.davis@example.com","address":{"street":"789 Oak Avenue","city":"Metropolis","state":"CA","zipcode":"90210"},"phoneNumbers":["555-0001","555-0002","555-0003"],"roles":["editor","viewer"],"preferences":{"notifications":true,"newsletter":true,"themes":["dark","red","yellow"]}},{"id":4,"name":"Diana Prince","email":"diana.prince@example.com","address":{"street":"101 Amazon Lane","city":"Themyscira","state":"GR","zipcode":"12345"},"phoneNumbers":["555-1111"],"roles":["admin"],"preferences":{"notifications":true,"newsletter":false,"themes":["gold","white"]}}]}
+
+
+
+<users><user id="1"><name>Alice Smith</name><email>alice.smith@example.com</email><address><street>123 Maple Street</street><city>Springfield</city><state>IL</state><zipcode>62704</zipcode></address><phoneNumbers><phone>555-1234</phone><phone>555-5678</phone></phoneNumbers><roles><role>admin</role><role>editor</role></roles><preferences notifications="true" newsletter="false"><themes><theme>dark</theme><theme>blue</theme></themes></preferences></user><user id="2"><name>Bob Johnson</name><email>bob.johnson@example.com</email><address><street>456 Elm Street</street><city>Riverdale</city><state>NY</state><zipcode>10471</zipcode></address><phoneNumbers><phone>555-9876</phone></phoneNumbers><roles><role>viewer</role></roles><preferences notifications="false" newsletter="true"><themes><theme>light</theme><theme>green</theme></themes></preferences></user><user id="3"><name>Charlie Davis</name><email>charlie.davis@example.com</email><address><street>789 Oak Avenue</street><city>Metropolis</city><state>CA</state><zipcode>90210</zipcode></address><phoneNumbers><phone>555-0001</phone><phone>555-0002</phone><phone>555-0003</phone></phoneNumbers><roles><role>editor</role><role>viewer</role></roles><preferences notifications="true" newsletter="true"><themes><theme>dark</theme><theme>red</theme><theme>yellow</theme></themes></preferences></user></users>
