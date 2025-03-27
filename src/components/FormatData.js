@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import prettier from "prettier/standalone";
-import parserXml from "@prettier/plugin-xml";
+import xmlFormat from "xml-formatter";
 
 const isLikelyXML = (str) => {
   return /^\s*<\w+[^>]*>/.test(str);
@@ -19,6 +18,7 @@ const FormatData = ({ inputString }) => {
       }
 
       try {
+        // Try to parse as JSON
         const json = JSON.parse(inputString);
         const prettyJSON = JSON.stringify(json, null, 2);
         setFormattedData(prettyJSON);
@@ -28,18 +28,21 @@ const FormatData = ({ inputString }) => {
         console.log("JSON parsing failed:", jsonErr.message);
       }
 
+      // Try to parse as XML
       if (isLikelyXML(inputString)) {
         try {
-          const prettyXML = await prettier.format(inputString, {
-            parser: "xml",
-            plugins: [parserXml],
+          // Use xml-formatter instead of prettier
+          const prettyXML = xmlFormat(inputString, {
+            indentation: "  ",
+            lineSeparator: "\n",
+            collapseContent: true,
           });
+
           setFormattedData(prettyXML);
           setDataType("xml");
           return;
         } catch (xmlErr) {
           console.log("XML parsing failed:", xmlErr.message);
-
           setFormattedData(inputString);
           setDataType("text");
         }
@@ -52,17 +55,11 @@ const FormatData = ({ inputString }) => {
     formatInput();
   }, [inputString]);
 
-  const getColor = () => {
-    if (dataType === "json") return "#1E90FF"; // blue
-    if (dataType === "xml") return "#32CD32"; // green
-    return "#000";
-  };
-
   const getMessage = () => {
     if (dataType === "json") return "JSON found and beautified";
-    if (dataType === "xml") return "XML found ";
+    if (dataType === "xml") return "XML found and beautified";
     if (dataType === "text") return "Text found";
-    return "Enter JSON/XML/Text";
+    return "Output JSON/XML/Text";
   };
 
   return (
@@ -79,7 +76,6 @@ const FormatData = ({ inputString }) => {
           border: "1px solid #ddd",
           fontFamily: "monospace",
           fontSize: "14px",
-          color: getColor(),
         }}
       >
         {formattedData}
